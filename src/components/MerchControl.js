@@ -7,7 +7,8 @@ class MerchControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false
+      formVisibleOnPage: false,
+      masterMerchList: []
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -18,14 +19,20 @@ class MerchControl extends React.Component {
     }));
   }
 
+  handleAddingNewMerchToList = (newMerch) => {
+    const newMasterMerchList = this.state.masterMerchList.concat(newMerch);
+    this.setState({masterMerchList: newMasterMerchList,
+                  formVisibleOnPage: false})
+  }
+
   render(){
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewMerchForm />
+      currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerchToList}/>
       buttonText = "Return to Merch"
     } else {
-      currentlyVisibleState = <MerchList />
+      currentlyVisibleState = <MerchList merchlist={this.state.masterMerchList}/>
       buttonText = "Add Merch";
     }
     return (

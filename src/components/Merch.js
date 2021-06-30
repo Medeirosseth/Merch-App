@@ -12,9 +12,9 @@ function Merch(props) {
 }
 
 Merch.propTypes = {
-  merchType: PropTypes.string.isRequired,
-  merchDescription: PropTypes.string.isRequired,
-  issue: PropTypes.string.isRequired
+  merchType: PropTypes.string,
+  merchDescription: PropTypes.string,
+  issue: PropTypes.string
 };
 
 export default Merch;

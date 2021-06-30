@@ -1,30 +1,12 @@
 import React from "react";
 import Merch from "./Merch";
+import PropTypes from "prop-types"
 
-const masterMerchList = [
-  {
-    merchType:"Jacket",
-    merchDescription: "80's blue jean jacket *hole on left arm",
-    issue: "Firebase wont save record. Halp"
-  },
-  {
-    merchType:"Pants",
-    merchDescription: "Levis 510",
-    issue: "Firebase wont save record. Halp"
-  },
-  {
-    merchType:"Hat",
-    merchDescription: "Ribbed beanie",
-    issue: "Firebase wont save record. Halp"
-  },
-]
-
-
-export default function MerchList() {
+function MerchList(props) { //add props as a parameter
   return (
     <>
     <hr/>
-      {masterMerchList.map((merch, index) =>
+      {props.merchlist.map((merch, index) => // Loop through the list passed down from MerchControl
         <Merch merchType={merch.merchType}
           merchDescription={merch.merchDescription}
           issues={merch.issue}
@@ -33,3 +15,9 @@ export default function MerchList() {
     </>
   )
 }
+
+  MerchList.propTypes = {
+    merchList: PropTypes.array
+  }
+
+  export default MerchList;
