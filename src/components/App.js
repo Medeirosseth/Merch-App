@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./Header";
-import MerchList from "./MerchList";
+import MerchControl from "./MerchControl"
 
 export default function App(){
   return (
     <>
       <Header />
-      <MerchList />
+      <MerchControl />
     </>
   );
 }
