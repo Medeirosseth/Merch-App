@@ -7,7 +7,7 @@ export default function newMerchForm(props) {
   function handleNewMerchFormSubmission(event) {
     event.preventDefault();
     props.onNewMerchCreation({
-      names: event.target.names.value, 
+    names: event.target.names.value, 
       description: event.target.description.value,
       issue: event.target.issue.value, 
       id: v4()

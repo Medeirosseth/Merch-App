@@ -1,6 +1,7 @@
 import React from "react";
 import NewMerchForm from "./NewMerchForm";
 import MerchList from "./MerchList";
+import MerchDetail from "./MerchDetail";
 
 class MerchControl extends React.Component {
 
@@ -8,15 +9,23 @@ class MerchControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterMerchList: []
+      masterMerchList: [],
+      selectedTicket: null
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick = () => {
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
+   if(this.state.selectedMerch != null) {
+     this.setState({
+       formVisibleOnPage: false,
+       selectedMerch: null
+     });
+   } else {
+     this.setState(prevState => ({
+       formVisibleOnPage: !prevState.formVisibleOnPage,
+     }));
+   }
   }
 
   handleAddingNewMerchToList = (newMerch) => {
@@ -24,17 +33,25 @@ class MerchControl extends React.Component {
     this.setState({masterMerchList: newMasterMerchList,
                   formVisibleOnPage: false})
   }
-
+  
+  handleChangingSelectedMerch = (id) => {
+    const selectedMerch = this.state.masterMerchList.filter(merch => merch.id === id)[0];
+    this.setState({selectedMerch: selectedMerch})
+  }
   render(){
-    let currentlyVisibleState = null;
+    let currentlyVisibleState = <MerchDetail merch = {this.state.selectedMerch} />
     let buttonText = null;
-    if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerchToList}/>
+
+    if (this.state.selectedMerch !=null) {
+      currentlyVisibleState = <MerchDetail merch = {this.state.selectedMerch} />
       buttonText = "Return to Merch"
+    } else if( this.state.formVisibleOnPage){
+      currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerchToList}/>
+      buttonText = "Return to Merch";
     } else {
-      currentlyVisibleState = <MerchList merchlist={this.state.masterMerchList}/>
-      buttonText = "Add Merch";
-    }
+      currentlyVisibleState = <MerchList merchList={this.state.masterMerchList} onTicketSelection={this.handleChangingSelectedMerch} />;
+      buttonText = "Add Ticket"
+    } 
     return (
       <React.Fragment>
         {currentlyVisibleState}

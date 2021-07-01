@@ -6,18 +6,22 @@ function MerchList(props) { //add props as a parameter
   return (
     <>
     <hr/>
-      {props.merchlist.map((merch, index) => // Loop through the list passed down from MerchControl
-        <Merch merchType={merch.merchType}
+      {props.merchlist.map((merch) => // Loop through the list passed down from MerchControl
+        <Merch
+          whenMerchClicked = { props.onTicketSelection } 
+          merchType={merch.merchType}
           merchDescription={merch.merchDescription}
           issues={merch.issue}
-          key={index}/>
+          id={merch.id}
+          key={merch.id}/>
       )}
     </>
   )
 }
 
   MerchList.propTypes = {
-    merchList: PropTypes.array
+    merchList: PropTypes.array,
+    onTicketSelection: PropTypes.func
   }
 
   export default MerchList;

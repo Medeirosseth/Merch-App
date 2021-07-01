@@ -4,9 +4,11 @@ import PropTypes from "prop-types"
 function Merch(props) {
   return (
     <>
-      <h3>{props.merchType} - {props.merchDescription}</h3>
-      <p><em>{props.issue}</em></p>
-      <hr/>
+        <div onClick = {() => props.whenTicketClicked(props.id)}>
+        <h3>{props.merchType} - {props.merchDescription}</h3>
+        <p><em>{props.issue}</em></p>
+        <hr/>
+      </div>
     </>
   )
 }
@@ -14,7 +16,9 @@ function Merch(props) {
 Merch.propTypes = {
   merchType: PropTypes.string,
   merchDescription: PropTypes.string,
-  issue: PropTypes.string
+  issue: PropTypes.string,
+  id: PropTypes.string,
+  whenTicketClicked: PropTypes.func
 };
 
 export default Merch;
